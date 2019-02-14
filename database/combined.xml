@@ -1,0 +1,91 @@
+<root>
+<books>
+<book publicationDate = "1934">
+<title> Mary Poppins </title>
+<author> P. L. Travers </author>
+<illustrator> Mary Shepard </illustrator>
+</book>
+<book publicationDate = "1935">
+<title> Mary Poppins Comes Back </title>
+<author> P. L. Travers </author>
+<illustrator> Mary Shepard </illustrator>
+</book>
+<book publicationDate = "1943">
+<title> Mary Poppins Opens the Door </title>
+<author> P. L. Travers </author>
+<illustrator> Mary Shepard </illustrator>
+</book>
+<book publicationDate = "1952">
+<title> Mary Poppins in the Park </title>
+<author> P. L. Travers </author>
+<illustrator> Mary Shepard </illustrator>
+</book>
+<book publicationDate = "1962">
+<title> Mary Poppins From A to Z </title>
+<author> P. L. Travers </author>
+<illustrator> Mary Shepard </illustrator>
+</book>
+<book publicationDate = "1975">
+<title> Mary Poppins in the Kitchen </title>
+<author> P. L. Travers </author>
+<illustrator> Mary Shepard </illustrator>
+</book>
+<book publicationDate = "1982">
+<title> Mary Poppins in Cherry Tree Lane </title>
+<author> P. L. Travers </author>
+<illustrator> Mary Shepard </illustrator>
+</book>
+<book publicationDate = "1988">
+<title> Mary Poppins and the House Next Door </title>
+<author> P. L. Travers </author>
+<illustrator> Mary Shepard </illustrator>
+</book>
+</books>
+<media>
+<movie year="1949" type="TV series" language="En">
+<title> Mary Poppins </title>
+<actress> Mary Wickes </actress>
+<actor> David Opatoshu </actor>
+<actor> Tommy Rettig </actor>
+<producer> CBS Television </producer>
+</movie>
+<movie year="1964" type="film" language="En">
+<title> Mary Poppins </title>
+<actress> Julie Andrews </actress>
+<actor> Dick Van Dyke </actor>
+<actor> David Tomlison </actor>
+<actress> Glynis Johns </actress>
+<producer> Walt Disney </producer>
+<director> Robert Stevenson </director>
+<academyNominations> 13 </academyNominations>
+</movie>
+<movie year="1983" type="film" language="Ru">
+<title> Mary Poppins, Goodbye </title>
+<actress> Natalya Andreychenko </actress>
+<actor> Albert Filozov </actor>
+<actor> Oleg Tabakov </actor>
+</movie>
+<theater year="2004" type="musical" language="En">
+<title> Mary Poppins (musical) </title>
+<producer> Cameron Mackintosh </producer>
+</theater>
+<broadcast year="2010" type="BBC Radio" language="En">
+<title> Mary Poppins </title>
+<actress> Juliet Stevenson </actress>
+<producer> BBC Radio 4 Extra </producer>
+</broadcast>
+<movie year="2013" type="film" language="En">
+<title> Saving Mr. Banks </title>
+<actress> Emma Thompson </actress>
+<actor> Tom Hanks </actor>
+<academyNominations> 1 </academyNominations>
+</movie>
+<movie year="2018" type="film" language="En">
+<title> Mary Poppins Returns </title>
+<actress> Emily Blunt </actress>
+<actor> Lin-Manuel Miranda </actor>
+<actress> Emily Mortimer </actress>
+<actor> Ben Whishaw </actor>
+</movie>
+</media>
+</root>
