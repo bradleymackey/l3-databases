@@ -12,6 +12,7 @@
 \usepackage{enumerate}
 \usepackage[font=small,labelfont=bf]{caption} % Required for specifying captions to tables and figures
 \usepackage{pgfgantt} % gantt chart!
+\usepackage{pdfpages}
 
 \graphicspath{ {./images/} }
 
@@ -24,7 +25,7 @@
 
 \section{Tree Structure}
 
-See the attached document for the tree diagram of \texttt{books.xml}. This is available on the \textbf{final page} of this report.
+See the attached document for the tree diagram of \texttt{books.xml}. This is available on the \textbf{final page} of this report. Any oddities in the layout are only a result of a lack of space.
 
 \section{Querying}
 
@@ -108,7 +109,7 @@ return <result>{count($b)}</result>
 \begin{verbatim}
 <result>8</result>
 \end{verbatim} 
-\item \textit{XPath}: As XPath and XQuery share the same functions library, we are able to construct an XPath query to accomplish the same functionality. We use the same path component with exactly the same predicates as the XQuery query. We then wrap this within the \texttt{count} function that simply counts the number of returned results.
+\item \textit{XPath}: As XPath and XQuery share the same functions library, we are able to construct an XPath query to accomplish the same functionality. We use the same path component with exactly the same predicates as the XQuery query. We then wrap this within the \texttt{count} function that simply counts the number of returned results. As the results returned by an XPath operation are akin to what is bound by a \texttt{let} statement in XQuery, this operation is seamless:
 \begin{verbatim}
 count(//book[title[contains(text(),"Mary Poppins")]])
 \end{verbatim}
@@ -163,7 +164,8 @@ return $b
   <illustrator>Mary Shepard</illustrator>
 </book>
 \end{verbatim} 
-\item \textit{XPath}:
+% I AM NOT SURE OR NOT IF THIS IS POSSIBLE FOR XPATH, THIS IS JUST A GUESS
+\item \textit{XPath}: This is not possible to be performed within XPath as more than one database needs to be accessed, and there are such dependencies between 
 \end{enumerate}
 
 \subsubsection{How much later has the most recent Mary Poppins movie appeared, compared to the second book about Mary Poppins?}
@@ -172,18 +174,35 @@ return $b
 \item \textit{Query}:
 \begin{small}
 \begin{verbatim}
-query
+let $byrs := ( 
+    for $b in doc("books.xml")//book 
+    where $b[title[contains(text(),"Mary Poppins")]] 
+    order by number($b/@publicationDate) 
+    return $b 
+) 
+let $byr := number($byrs[2]/@publicationDate) 
+let $myrs := ( 
+    for $mov in doc("media.xml")//movie 
+    where $mov[title[contains(text(),"Mary Poppins")]] 
+    order by number($mov/@year) descending 
+    return $mov 
+) 
+let $myr := number($myrs[1]/@year) 
+let $diff := sum ( ($myr, -$byr) ) 
+return <result>{$diff} years</result>
 \end{verbatim}
 \end{small}
-\item \textit{Interpretation}:
-\item \textit{Limitations}: 
+\item \textit{Interpretation}: similar to the previous question, we firstly order all books by their publication year so we know that index positions directly correspond to the year they were released. We then get the \texttt{publicationDate} of the second book to be released indexing and converting to a number by performing \texttt{number(\$byrs[2]/@publicationDate)}. We perform a similar operation on the movies, except ordering these descending such that we can easily access the most recent movie, ordering by the \texttt{year} property of each \texttt{movie}. We then get the year of the most recent movie and convert this to a number by doing \texttt{number(\$myrs[1]/@year)}. Then we calculate the difference between these two years using the XQuery library function \texttt{sum}, which is able to add a list of numbers, returning a numeric result. The equation performed is the equivalent of $year_{movie}-year_{book}$. The result is then returned in a \texttt{result} node.
+\item \textit{Limitations}: Again, similar to the prior question, as this technique requires sorting it may not scale well as the database grows. As this sorts \textbf{both} the movie and books dataset, this will scale even worse than the prior question. Similar to the prior questions as well, this identifies Mary Poppins movies and books by seeing if her name is contained in the title. If it is not, it will not be successfully identified as a Mary Poppins movie or book.
 \item \textit{Output}:
 \begin{verbatim}
+<result>83 years</result>
 \end{verbatim} 
-\item \textit{XPath}:
+\item \textit{XPath}: not sure if this is possible for multiple XML files.
 \end{enumerate}
 
 
+\includepdf[pages=-]{diagram.pdf}
 
 
 \end{document}
