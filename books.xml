@@ -1,0 +1,42 @@
+<books>
+<book publicationDate = "1934">
+<title> Mary Poppins </title>
+<author> P. L. Travers </author>
+<illustrator> Mary Shepard </illustrator>
+</book>
+<book publicationDate = "1935">
+<title> Mary Poppins Comes Back </title>
+<author> P. L. Travers </author>
+<illustrator> Mary Shepard </illustrator>
+</book>
+<book publicationDate = "1943">
+<title> Mary Poppins Opens the Door </title>
+<author> P. L. Travers </author>
+<illustrator> Mary Shepard </illustrator>
+</book>
+<book publicationDate = "1952">
+<title> Mary Poppins in the Park </title>
+<author> P. L. Travers </author>
+<illustrator> Mary Shepard </illustrator>
+</book>
+<book publicationDate = "1962">
+<title> Mary Poppins From A to Z </title>
+<author> P. L. Travers </author>
+<illustrator> Mary Shepard </illustrator>
+</book>
+<book publicationDate = "1975">
+<title> Mary Poppins in the Kitchen </title>
+<author> P. L. Travers </author>
+<illustrator> Mary Shepard </illustrator>
+</book>
+<book publicationDate = "1982">
+<title> Mary Poppins in Cherry Tree Lane </title>
+<author> P. L. Travers </author>
+<illustrator> Mary Shepard </illustrator>
+</book>
+<book publicationDate = "1988">
+<title> Mary Poppins and the House Next Door </title>
+<author> P. L. Travers </author>
+<illustrator> Mary Shepard </illustrator>
+</book>
+</books>

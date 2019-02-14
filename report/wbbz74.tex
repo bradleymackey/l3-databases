@@ -24,7 +24,7 @@
 
 \section{Tree Structure}
 
-See the attached document for the tree diagram of \texttt{books.xml}.
+See the attached document for the tree diagram of \texttt{books.xml}. This is available on the \textbf{final page} of this report.
 
 \section{Querying}
 
@@ -33,15 +33,15 @@ See the attached document for the tree diagram of \texttt{books.xml}.
 \subsubsection{Find all Mary Poppins books which were published before WWII.}
 
 \begin{enumerate}
-\item \textbf{Query}:
+\item \textit{Query}:
 \begin{small}
 \begin{verbatim}
-//book[@publicationDate<"1939"][title [contains(text(),"Mary Poppins")]]
+//book[@publicationDate<"1939"][title[contains(text(),"Mary Poppins")]]
 \end{verbatim}
 \end{small}
-\item \textbf{Interpretation}: This query first uses the Restricted Kleene Closure to find every occurrence of \texttt{<book>} in the XML structure. This ensures that we find all books at all levels of the database (if the database were to be grown in the future). We then use a tag predicate of \texttt{[@publicationDate<"1939"]} to filter out all books that were NOT released before 1939. For all the books returned by this, we then check if they have a \texttt{title} property. If they do, we use a nested predicate to check the title of the book. If the book title contains the string \texttt{"Mary Poppins"} (not including these quotation marks), the full book node will be returned.
-\item \textbf{Limitations}: this query will only find Mary Poppins books if her name appears directly in the title. If such a Mary Poppins book existed that did not feature her name in the title, it would not be returned by our query. It is not sufficient just to check the author or illustrator as they may have been involved in creating other books (not Mary Poppins). Additionally, WWII started in September of 1939 and---as we have no way to distinguish the month of publication---it may be the case that a book published in 1939 was actually published before WWII. We have no way of telling this.
-\item \textbf{Output}:
+\item \textit{Interpretation}: This query first uses the Restricted Kleene Closure to find every occurrence of \texttt{<book>} in the XML structure. This ensures that we find all books at all levels of the database (if the database were to be grown in the future). We then use a tag predicate of \texttt{[@publicationDate<"1939"]} to filter out all books that were NOT released before 1939. For all the books returned by this, we then check if they have a \texttt{title} property. If they do, we use a nested predicate to check the title of the book. If the book title contains the string \texttt{"Mary Poppins"} (not including these quotation marks), the full book node will be returned.
+\item \textit{Limitations}: this query will only find Mary Poppins books if her name appears directly in the title. If such a Mary Poppins book existed that did not feature her name in the title, it would not be returned by our query. It is not sufficient just to check the author or illustrator as they may have been involved in creating other books (not Mary Poppins). Additionally, WWII started in September of 1939 and---as we have no way to distinguish the month of publication---it may be the case that a book published in 1939 was actually published before WWII. We have no way of telling this, we just ignore all books published in 1939 to be sure.
+\item \textit{Output}:
 \begin{verbatim}
 <book publicationDate="1934">
    <title> Mary Poppins </title>
@@ -60,15 +60,15 @@ See the attached document for the tree diagram of \texttt{books.xml}.
 \subsubsection{Find all movies that have academy nominations.}
 
 \begin{enumerate}
-\item \textbf{Query}:
+\item \textit{Query}:
 \begin{small}
 \begin{verbatim}
 //movie[normalize-space(academyNominations/text()) > "0"]
 \end{verbatim}
 \end{small}
-\item \textbf{Interpretation}: This query first uses the Restricted Kleene Closure to find every occurrence of \texttt{<movie>} in the XML structure. This ensures that we find all movies at all levels of the database (if the database were to be grown in the future). We then use a tag predicate of \texttt{academyNominations}, filtering out all movies that do not include an \texttt{<academyNominations>} node. We access the text stored at this node using the XPath \texttt{text()} function. As the XML files provided have whitespace surrounding the text in each node, we use the \texttt{normalize-space} function to remove this whitespace, as to not retrieve inaccurate results. We then ensure that the number of nominations is greater than 0, as it could be possible a movie could have an \texttt{<academyNominations>} node with 0 nominations. Movie nodes filtered out by this predicate are not included in our results.
-\item \textbf{Limitations}: 
-\item \textbf{Output}:
+\item \textit{Interpretation}: This query first uses the Restricted Kleene Closure to find every occurrence of \texttt{<movie>} in the XML structure. This ensures that we find all movies at all levels of the database (if the database were to be grown in the future). We then use a tag predicate of \texttt{academyNominations}, filtering out all movies that do not include an \texttt{<academyNominations>} node. We access the text stored at this node using the XPath \texttt{text()} function. As the XML files provided have whitespace surrounding the text in each node, we use the \texttt{normalize-space} function to remove this whitespace, as to not retrieve inaccurate results. We then ensure that the number of nominations is greater than 0, as it could be possible a movie could have an \texttt{<academyNominations>} node with 0 nominations. Movie nodes filtered out by this predicate are not included in our results.
+\item \textit{Limitations}: this query relies on the fact that \texttt{academyNominations} are stored as an integer inside the \texttt{<academyNominations>} node. If the nominations were instead listed out (as \texttt{<nominator>} nodes for example), the query would not be able to identify these. Otherwise, if all movies follow this style of listing nominations, there are no further limitations.
+\item \textit{Output}:
 \begin{verbatim}
 <movie language="En" type="film" year="1964">
    <title> Mary Poppins </title>
@@ -94,9 +94,94 @@ See the attached document for the tree diagram of \texttt{books.xml}.
 
 \subsubsection{How many books have there been published about Mary Poppins?}
 
+\begin{enumerate}
+\item \textit{Query}:
+\begin{small}
+\begin{verbatim}
+let $b := doc("books.xml")//book[title[contains(text(),"Mary Poppins")]]
+return <result>{count($b)}</result>
+\end{verbatim}
+\end{small}
+\item \textit{Interpretation}: we start by using the \texttt{let} keyword to bind to all results of a query at once, allowing us to perform aggregate operations on the results of the query. We open the \texttt{"books.xml"} file such that we can query it. Using a similar XPath style query as question 1, we query the document for all \texttt{book} nodes using the Restricted Kleene Closure. This will allow us to find all possible \texttt{<book>} nodes at any point in the database, even if the database were to grow in size in the future. We then use a predicate to assert that each returned \texttt{book} has a \texttt{title} property. Then, we use a nested predicate to evaluate the text of the title, using the \texttt{text()} function. We assert that the title must contain the string \texttt{"Mary Poppins"}, such that all books about Mary Poppins are returned. Then, in the \texttt{return} block, we perform an aggregate \texttt{count} of all the results, returning this in a \texttt{<result>} tag.
+\item \textit{Limitations}: Similar to question 1, this will only count books where \texttt{"Mary Poppins"} appears in the title directly. If there is a book that is actually about Mary Poppins but does not include her name in the title, it will not be included in the book count.
+\item \textit{Output}:
+\begin{verbatim}
+<result>8</result>
+\end{verbatim} 
+\item \textit{XPath}: As XPath and XQuery share the same functions library, we are able to construct an XPath query to accomplish the same functionality. We use the same path component with exactly the same predicates as the XQuery query. We then wrap this within the \texttt{count} function that simply counts the number of returned results.
+\begin{verbatim}
+count(//book[title[contains(text(),"Mary Poppins")]])
+\end{verbatim}
+\end{enumerate}
+
+
 \subsubsection{List the books that have been published before the second Mary Poppins movie appeared.}
 
+\begin{enumerate}
+\item \textit{Query}:
+\begin{small}
+\begin{verbatim}
+let $yrs := (
+    for $mov in doc("media.xml")//movie
+    where $mov[title[contains(text(),"Mary Poppins")]]
+    order by number($mov/@year) 
+    return $mov
+) 
+let $yr2 := number($yrs[2]/@year) 
+for $b in doc ("books.xml")//book 
+where $b[number(@publicationDate) < $yr2] 
+return $b
+\end{verbatim}
+\end{small}
+\item \textit{Interpretation}: we firstly need to find what year the second Mary Poppins movie appeared. Therefore, we perform a nested query to return a list of Mary Poppins movies, ordered by the year that they were released. This allows us to directly index into the list using \texttt{\$yrs[2]/@year} to get the year that the second movie was released. This ordering and indexing is a nice interface to easily change this value in the future if the database required it---we simply just change the number of the index to get books released before that specific movie. We then fetch all books from the books database, using a \texttt{where} predicate to only return books that were released before this second movie was released by comparing the \texttt{@publicationDate} to the value of \texttt{\$yr2}. We then return each result that matches this predicate as the successful query cases.
+\item \textit{Limitations}: this technique suffers from the same limitations as the previous queries, as movies without \texttt{"Mary Poppins"} in the title will not be considered Mary Poppins movies, as these are what is matched against. Additionally, in order for us to find the second released movie, we sort through all movies with Mary Poppins in the title first. If the database contained many movies with \texttt{"Mary Poppins"} in the title, this sorting could take a non-trivial amount of time and impact database performance (as sorting is at least an $\mathcal{O}({n\log{n})}$ operation).
+\item \textit{Output}:
+\begin{verbatim}
+<book publicationDate="1934">
+  <title>Mary Poppins</title>
+  <author>P. L. Travers</author>
+  <illustrator>Mary Shepard</illustrator>
+</book>
+<book publicationDate="1935">
+  <title>Mary Poppins Comes Back</title>
+  <author>P. L. Travers</author>
+  <illustrator>Mary Shepard</illustrator>
+</book>
+<book publicationDate="1943">
+  <title>Mary Poppins Opens the Door</title>
+  <author>P. L. Travers</author>
+  <illustrator>Mary Shepard</illustrator>
+</book>
+<book publicationDate="1952">
+  <title>Mary Poppins in the Park</title>
+  <author>P. L. Travers</author>
+  <illustrator>Mary Shepard</illustrator>
+</book>
+<book publicationDate="1962">
+  <title>Mary Poppins From A to Z</title>
+  <author>P. L. Travers</author>
+  <illustrator>Mary Shepard</illustrator>
+</book>
+\end{verbatim} 
+\item \textit{XPath}:
+\end{enumerate}
+
 \subsubsection{How much later has the most recent Mary Poppins movie appeared, compared to the second book about Mary Poppins?}
+
+\begin{enumerate}
+\item \textit{Query}:
+\begin{small}
+\begin{verbatim}
+query
+\end{verbatim}
+\end{small}
+\item \textit{Interpretation}:
+\item \textit{Limitations}: 
+\item \textit{Output}:
+\begin{verbatim}
+\end{verbatim} 
+\item \textit{XPath}:
+\end{enumerate}
 
 
 
