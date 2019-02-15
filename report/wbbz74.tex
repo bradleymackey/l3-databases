@@ -167,11 +167,23 @@ return $b
 </book>
 \end{verbatim} 
 
-\item \textit{XPath}: This is not possible to be performed within XPath as more than one database needs to be accessed, and there are such dependencies between these different database files. However, if we assume both datasets are present in the same file (where the \texttt{books} and \texttt{media} nodes are both present at the root of the file and that \texttt{books} appears before \texttt{media} and both lists are contained within a \texttt{root} node), we can construct a rough query. We must assume that the nodes in the XML file are already ordered by date, which is the major limitation of this technique.
-% THIS SHOULD WORK I THINK BUT I CANNOT GET THIS TO WORK!
+\item \textit{XPath}: This is not possible to be performed within XPath as more than one database needs to be accessed, and there are such dependencies between these different database files. However, if we assume both datasets are present in the same file (where the \texttt{books} and \texttt{media} nodes are both present at the root of the file and that \texttt{books} appears before \texttt{media} and both lists are contained within a \texttt{root} node), we can construct a rough query. We must assume that the nodes in the XML file are already ordered by date, which is the major limitation of this technique. We return all books where the numeric value of the \texttt{publicationDate} is less than the release year of the second movie that appears in the returned list of movies about Mary Poppins. (As this query is long it is broken up into several lines here, although it should be run just as a single line when executing).
+% verified working
+\begin{small}
 \begin{verbatim}
-//books[number(@publicationDate)<number(ancestor::root//movie[2]/@year)]
+//book[
+    number(
+        @publicationDate/string()
+    )
+    <
+    number(
+        ancestor::root
+        //movie[title[contains(text(),"Mary Poppins")]][2]
+        /@year
+    )
+]
 \end{verbatim}
+\end{small}
 \end{enumerate}
 
 \subsubsection{How much later has the most recent Mary Poppins movie appeared, compared to the second book about Mary Poppins?}
@@ -205,7 +217,7 @@ return <result>{$diff} years</result>
 <result>83 years</result>
 \end{verbatim} 
 % I AM NOT SURE OR NOT IF THIS IS POSSIBLE FOR XPATH, THIS IS JUST A GUESS
-\item \textit{XPath}: This is not a query that is possible for XPath to handle. This is due to the fact there are dependencies on accessing 2 independent lists of data and then the performing of an operation of the result of the two independent lists. As XPath is only able to access a single list of data, this is not a query that is able to be performed with XPath.
+\item \textit{XPath}: This is not a query that is possible for XPath to handle. This is due to the fact there are dependencies on accessing 2 independent lists of data and then the performing of an operation of the result of the two independent lists. As XPath is only able to access a single list of data (and possible compare each value in this list with a single element from another list), this is not able to be done.
 \end{enumerate}
 
 

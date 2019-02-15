@@ -1,0 +1,1 @@
+doc("combined.xml")//book[number(@publicationDate/string())<number(ancestor::root//movie[2]/@year)]
