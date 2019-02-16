@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.7.26)  15 FEB 2019 13:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.7.26)  16 FEB 2019 09:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -710,34 +710,34 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 <diagram.pdf, id=29, 770.88pt x 1505.625pt>
 File: diagram.pdf Graphic file (type pdf)
 <use diagram.pdf>
-Package pdftex.def Info: diagram.pdf  used on input line 224.
+Package pdftex.def Info: diagram.pdf  used on input line 222.
 (pdftex.def)             Requested size: 770.87813pt x 1505.62134pt.
 File: diagram.pdf Graphic file (type pdf)
 <use diagram.pdf>
-Package pdftex.def Info: diagram.pdf  used on input line 224.
+Package pdftex.def Info: diagram.pdf  used on input line 222.
 (pdftex.def)             Requested size: 770.87813pt x 1505.62134pt.
 <diagram.pdf, id=32, page=1, 770.88pt x 1505.625pt>
 File: diagram.pdf Graphic file (type pdf)
 <use diagram.pdf, page 1>
-Package pdftex.def Info: diagram.pdf , page1 used on input line 224.
+Package pdftex.def Info: diagram.pdf , page1 used on input line 222.
 (pdftex.def)             Requested size: 770.87813pt x 1505.62134pt.
 File: diagram.pdf Graphic file (type pdf)
 <use diagram.pdf, page 1>
-Package pdftex.def Info: diagram.pdf , page1 used on input line 224.
+Package pdftex.def Info: diagram.pdf , page1 used on input line 222.
 (pdftex.def)             Requested size: 407.18823pt x 795.2895pt.
 
 [6]
 File: diagram.pdf Graphic file (type pdf)
 <use diagram.pdf, page 1>
-Package pdftex.def Info: diagram.pdf , page1 used on input line 224.
+Package pdftex.def Info: diagram.pdf , page1 used on input line 222.
 (pdftex.def)             Requested size: 407.18823pt x 795.2895pt.
 File: diagram.pdf Graphic file (type pdf)
 <use diagram.pdf, page 1>
-Package pdftex.def Info: diagram.pdf , page1 used on input line 224.
+Package pdftex.def Info: diagram.pdf , page1 used on input line 222.
 (pdftex.def)             Requested size: 407.18823pt x 795.2895pt.
 File: diagram.pdf Graphic file (type pdf)
 <use diagram.pdf, page 1>
-Package pdftex.def Info: diagram.pdf , page1 used on input line 224.
+Package pdftex.def Info: diagram.pdf , page1 used on input line 222.
 (pdftex.def)             Requested size: 407.18823pt x 795.2895pt.
  [7 <./diagram.pdf, page is rotated 90 degrees>] (./wbbz74.aux) ) 
 Here is how much of TeX's memory you used:
@@ -758,7 +758,7 @@ ve/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive
 8/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2018/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on wbbz74.pdf (7 pages, 152819 bytes).
+Output written on wbbz74.pdf (7 pages, 152847 bytes).
 PDF statistics:
  93 PDF objects out of 1000 (max. 8388607)
  65 compressed objects within 1 object stream

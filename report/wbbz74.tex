@@ -167,14 +167,12 @@ return $b
 </book>
 \end{verbatim} 
 
-\item \textit{XPath}: If we assume both datasets are present in the same file (where the \texttt{books} and \texttt{media} nodes are both present at the root of the file and that \texttt{books} appears before \texttt{media} and both lists are contained within a \texttt{root} node), we can construct a rough query. We must assume that the nodes in the XML file are already ordered by date, which is the major limitation of this technique. We return all books where the numeric value of the \texttt{publicationDate} is less than the release year of the second movie that appears in the returned list of movies about Mary Poppins. (As this query is long it is broken up into several lines here, although it should be run just as a single line when executing).
+\item \textit{XPath}: If we assume both datasets are present in the same file (where the \texttt{<books>} and \texttt{<media>} nodes are both present within a \texttt{<root>} node), we can construct a rough query. We must assume that the nodes in the \texttt{<books>} and \texttt{<media>} nodes are already ordered by date, which is the major limitation of this technique compared to what we can achieve with XQuery. We return all books where the numeric value of the \texttt{publicationDate} is less than the release year of the second movie that appears in the returned list of movies about Mary Poppins. This query is not as extensible if the size of the database were to be increased. (As this query is long it is broken up into several lines here, although it should be run just as a single line when executing).
 % verified working
 \begin{small}
 \begin{verbatim}
 //book[
-    number(
-        @publicationDate/string()
-    )
+    number(@publicationDate/string())
     <
     number(
         ancestor::root
