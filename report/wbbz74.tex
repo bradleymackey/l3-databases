@@ -129,7 +129,10 @@ return <result>{count($b)}</result>
 \item \textit{XPath}: As XPath and XQuery share the same functions library, we are able to construct an XPath query to accomplish the same functionality. We use the same path component with exactly the same predicates as the XQuery query. We then wrap this within the \texttt{count} function that simply counts the number of returned results. As the results returned by an XPath operation are akin to what is bound by a \texttt{let} statement in XQuery, this operation is seamless:
 \begin{verbatim}
 <result>{
-    count(distinct-values(doc("books.xml")//book[title[contains(text(),"Mary Poppins")]]))
+    count(
+    distinct-values(
+    doc("books.xml")//book[title[contains(text(),"Mary Poppins")]]
+    ))
 }</result>
 \end{verbatim}
 \end{enumerate}
